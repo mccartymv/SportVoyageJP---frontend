@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { DatePipe } from '@angular/common';
 import { GameService } from '../../services/game.service';
 
 @Component({
@@ -9,7 +8,7 @@ import { GameService } from '../../services/game.service';
   templateUrl: './game-list.component.html',
   styleUrls: ['./game-list.component.css'],
   standalone: true,
-  imports: [CommonModule, HttpClientModule] // Import necessary modules
+  imports: [CommonModule, HttpClientModule]
 })
 export class GameListComponent implements OnInit {
   games: any[] = [];
@@ -18,7 +17,20 @@ export class GameListComponent implements OnInit {
 
   ngOnInit(): void {
     this.gameService.getGames().subscribe((data) => {
-      this.games = data;
+      // Convert the startTime to JST
+      this.games = data.map(game => ({
+        ...game,
+        startTime: this.convertToJST(new Date(game.startTime))
+      }));
     });
+  }
+
+  // Function to convert date to JST
+  convertToJST(date: Date): Date {
+    // Create a new date in JST (UTC+9)
+    const jstOffset = 9 * 60; // JST is UTC+9
+    const localOffset = date.getTimezoneOffset(); // Local offset from UTC in minutes
+    const jstTime = new Date(date.getTime() + (jstOffset - localOffset) * 60000);
+    return jstTime;
   }
 }
