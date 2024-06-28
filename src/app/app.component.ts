@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { GameListComponent } from './components/game-list/game-list.component';
+import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
+  template: '<app-game-list></app-game-list>',
   standalone: true,
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  imports: [GameListComponent, HttpClientModule, CommonModule]  // Ensure HttpClientModule is imported
 })
-export class AppComponent {
-  title = 'frontend';
-}
+export class AppComponent { }
