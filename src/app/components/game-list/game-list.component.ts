@@ -63,9 +63,12 @@ export class GameListComponent implements OnInit {
     if (this.selectedTeams.size === 0) {
       this.filteredGames = this.games;
     } else {
-      this.filteredGames = this.games.filter(game =>
-        this.selectedTeams.has(game.homeTeam) || this.selectedTeams.has(game.awayTeam)
-      );
+      this.filteredGames = this.games.filter(game => {
+        const selectedTeamsArray = Array.from(this.selectedTeams);
+        return selectedTeamsArray.every(team =>
+          (game.homeTeam === team || game.awayTeam === team)
+        );
+      });
     }
     this.gridApi.setRowData(this.filteredGames);
   }
