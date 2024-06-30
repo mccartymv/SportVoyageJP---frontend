@@ -17,20 +17,11 @@ export class GameListComponent implements OnInit {
 
   ngOnInit(): void {
     this.gameService.getGames().subscribe((data) => {
-      // Convert the startTime to JST
       this.games = data.map(game => ({
         ...game,
-        startTime: this.convertToJST(new Date(game.startTime))
+        startTime: new Date(game.startTime)
       }));
     });
   }
 
-  // Function to convert date to JST
-  convertToJST(date: Date): Date {
-    // Create a new date in JST (UTC+9)
-    const jstOffset = 9 * 60; // JST is UTC+9
-    const localOffset = date.getTimezoneOffset(); // Local offset from UTC in minutes
-    const jstTime = new Date(date.getTime() + (jstOffset - localOffset) * 60000);
-    return jstTime;
-  }
 }
