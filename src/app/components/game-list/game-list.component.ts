@@ -20,7 +20,6 @@ export class GameListComponent implements OnInit {
   selectedTeams: Set<string> = new Set();
 
   columnDefs: ColDef[] = [
-    { field: 'gameId', headerName: 'Game ID', filter: 'agTextColumnFilter' },
     { field: 'startTime', headerName: 'Start Time', filter: 'agDateColumnFilter', valueFormatter: this.dateFormatter },
     { field: 'homeTeam', headerName: 'Home Team', filter: 'agTextColumnFilter' },
     { field: 'awayTeam', headerName: 'Away Team', filter: 'agTextColumnFilter' },
