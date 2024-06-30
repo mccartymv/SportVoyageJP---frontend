@@ -1,23 +1,10 @@
 <div class="container">
   <h2>Game List</h2>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Game ID</th>
-        <th>Start Time</th>
-        <th>Home Team</th>
-        <th>Away Team</th>
-        <th>Venue</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let game of games">
-        <td>{{ game.gameId }}</td>
-        <td>{{ game.startTime | date:'short' }}</td>
-        <td>{{ game.homeTeam }}</td>
-        <td>{{ game.awayTeam }}</td>
-        <td>{{ game.venue.name }}, {{ game.venue.city }}</td>
-      </tr>
-    </tbody>
-  </table>
+  <ag-grid-angular
+    style="width: 100%; height: 600px;"
+    class="ag-theme-alpine"
+    [rowData]="games"
+    [columnDefs]="columnDefs"
+    [defaultColDef]="defaultColDef">
+  </ag-grid-angular>
 </div>
