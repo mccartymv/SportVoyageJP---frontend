@@ -12,7 +12,7 @@
       </ag-grid-angular>
     </div>
     <div class="sidenav">
-      <h3>Filter by Teams</h3>
+      <h3>Teams</h3>
       <div *ngFor="let team of teams">
         <input
           type="checkbox"
@@ -21,6 +21,16 @@
           (change)="onTeamSelectionChange($event)"
         />
         <label [for]="team">{{ team }}</label>
+      </div>
+      <h3>Venues</h3>
+      <div *ngFor="let venue of venues">
+        <input
+          type="checkbox"
+          [id]="venue"
+          [value]="venue"
+          (change)="onVenueSelectionChange($event)"
+        />
+        <label [for]="venue">{{ venue }}</label>
       </div>
     </div>
   </div>

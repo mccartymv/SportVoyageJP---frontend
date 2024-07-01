@@ -17,7 +17,9 @@ export class GameListComponent implements OnInit {
   games: any[] = [];
   filteredGames: any[] = [];
   teams: string[] = [];
+  venues: string[] = [];
   selectedTeams: Set<string> = new Set();
+  selectedVenues: Set<string> = new Set();
 
   columnDefs: ColDef[] = [
     { field: 'startTime', headerName: 'Start Time', filter: 'agDateColumnFilter', valueFormatter: this.dateFormatter },
@@ -41,6 +43,7 @@ export class GameListComponent implements OnInit {
       }));
       this.filteredGames = this.games;
       this.teams = Array.from(new Set(this.games.flatMap(game => [game.homeTeam, game.awayTeam])));
+      this.venues = Array.from(new Set(this.games.map(game => game.venue.name)));
     });
   }
 
@@ -55,20 +58,25 @@ export class GameListComponent implements OnInit {
     } else {
       this.selectedTeams.delete(team);
     }
-    this.applyTeamFilter();
+    this.applyFilters();
   }
 
-  applyTeamFilter() {
-    if (this.selectedTeams.size === 0) {
-      this.filteredGames = this.games;
+  onVenueSelectionChange(event: any) {
+    const venue = event.target.value;
+    if (event.target.checked) {
+      this.selectedVenues.add(venue);
     } else {
-      this.filteredGames = this.games.filter(game => {
-        const selectedTeamsArray = Array.from(this.selectedTeams);
-        return selectedTeamsArray.every(team =>
-          (game.homeTeam === team || game.awayTeam === team)
-        );
-      });
+      this.selectedVenues.delete(venue);
     }
+    this.applyFilters();
+  }
+
+  applyFilters() {
+    this.filteredGames = this.games.filter(game => {
+      const teamMatch = this.selectedTeams.size === 0 || this.selectedTeams.has(game.homeTeam) || this.selectedTeams.has(game.awayTeam);
+      const venueMatch = this.selectedVenues.size === 0 || this.selectedVenues.has(game.venue.name);
+      return teamMatch && venueMatch;
+    });
     this.gridApi.setRowData(this.filteredGames);
   }
 
