@@ -12,7 +12,8 @@
       </ag-grid-angular>
     </div>
     <div class="sidenav">
-      <h3>Teams</h3>
+      <button (click)="clearAll()">Clear All</button>
+      <h3>Filter by Teams</h3>
       <div *ngFor="let team of teams">
         <input
           type="checkbox"
@@ -22,7 +23,7 @@
         />
         <label [for]="team">{{ team }}</label>
       </div>
-      <h3>Venues</h3>
+      <h3>Filter by Venues</h3>
       <div *ngFor="let venue of venues">
         <input
           type="checkbox"
@@ -32,7 +33,6 @@
         />
         <label [for]="venue">{{ venue }}</label>
       </div>
-      <button (click)="clearAll()">Clear All</button>
     </div>
   </div>
 </div>

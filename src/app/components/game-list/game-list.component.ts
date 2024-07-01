@@ -78,6 +78,17 @@ export class GameListComponent implements OnInit {
       const venueMatch = this.selectedVenues.size === 0 || this.selectedVenues.has(game.venue.name);
       return teamMatch && venueMatch;
     });
+
+    // Ensure the filtered results show only games where selected teams meet if multiple teams are selected
+    if (this.selectedTeams.size > 0) {
+      this.filteredGames = this.filteredGames.filter(game => {
+        const selectedTeamsArray = Array.from(this.selectedTeams);
+        return selectedTeamsArray.every(team =>
+          (game.homeTeam === team || game.awayTeam === team)
+        );
+      });
+    }
+
     this.gridApi.setRowData(this.filteredGames);
   }
 
