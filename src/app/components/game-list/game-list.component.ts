@@ -80,6 +80,14 @@ export class GameListComponent implements OnInit {
     this.gridApi.setRowData(this.filteredGames);
   }
 
+  clearAll() {
+    this.selectedTeams.clear();
+    this.selectedVenues.clear();
+    this.applyFilters();
+    const checkboxes = document.querySelectorAll('.sidenav input[type="checkbox"]') as NodeListOf<HTMLInputElement>;
+    checkboxes.forEach(checkbox => checkbox.checked = false);
+  }
+
   dateFormatter(params: any): string {
     return new Date(params.value).toLocaleString();
   }
