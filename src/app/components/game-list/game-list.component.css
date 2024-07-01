@@ -17,6 +17,8 @@
   width: 200px;
   padding: 15px;
   border-left: 1px solid #ddd;
+  max-height: 600px;
+  overflow-y: auto;
 }
 
 .sidenav h3 {
