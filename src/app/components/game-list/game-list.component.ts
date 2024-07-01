@@ -22,15 +22,16 @@ export class GameListComponent implements OnInit {
   selectedVenues: Set<string> = new Set();
 
   columnDefs: ColDef[] = [
-    { field: 'startTime', headerName: 'Start Time', filter: 'agDateColumnFilter', valueFormatter: this.dateFormatter },
-    { field: 'homeTeam', headerName: 'Home Team', filter: 'agTextColumnFilter' },
-    { field: 'awayTeam', headerName: 'Away Team', filter: 'agTextColumnFilter' },
-    { field: 'venue.name', headerName: 'Venue Name', filter: 'agTextColumnFilter' },
-    { field: 'venue.city', headerName: 'Venue City', filter: 'agTextColumnFilter' }
+    { field: 'startTime', headerName: 'Start Time', valueFormatter: this.dateFormatter },
+    { field: 'homeTeam', headerName: 'Home Team' },
+    { field: 'awayTeam', headerName: 'Away Team' },
+    { field: 'venue.name', headerName: 'Venue Name' },
+    { field: 'venue.city', headerName: 'Venue City' }
   ];
+
   defaultColDef: ColDef = {
-    sortable: true,
-    filter: true,
+    sortable: false,
+    filter: false,
   };
 
   constructor(private gameService: GameService) {}
