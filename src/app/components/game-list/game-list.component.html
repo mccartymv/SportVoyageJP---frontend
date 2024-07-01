@@ -12,7 +12,6 @@
       </ag-grid-angular>
     </div>
     <div class="sidenav">
-      <button (click)="clearAll()">Clear All</button>
       <h3>Teams</h3>
       <div *ngFor="let team of teams">
         <input
@@ -33,6 +32,7 @@
         />
         <label [for]="venue">{{ venue }}</label>
       </div>
+      <button (click)="clearAll()">Clear All</button>
     </div>
   </div>
 </div>
